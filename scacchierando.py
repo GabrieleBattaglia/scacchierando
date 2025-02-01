@@ -1,4 +1,4 @@
-# V11.0 del 2025.01.31 by IZ4APU and ChatGPT O1
+# V11.2 del 2025.02.01 by IZ4APU and ChatGPT O1
 import json
 import os
 from datetime import datetime
@@ -67,25 +67,15 @@ def genera_report(dati):
 				contatore = dettagli["Aiuto"]["valutazioni"]
 			media = totale / contatore if contatore != 0 else 0
 			report_lines.append(f"{pos_str}: ({contatore}) {studente}: {totale}: {media:.2f}")
-
-	# --- 5a sezione: Note degli studenti ---
-	report_lines.append("\n## NOTE DEGLI STUDENTI.\n")
-	# Ordiniamo gli studenti in ordine alfabetico, 
-	# oppure puoi lasciare items() liscio se vuoi l’ordine d’inserimento
+	report_lines.append("\n## NOTE DEGLI STUDENTI.")
 	for i, (studente, dettagli) in enumerate(sorted(dati.items()), start=1):
-		# Raccogliamo la stringa delle note
 		note_str = dettagli.get("Note", "").strip()
-		# Se l’utente ha accumulato note su più righe, le dividiamo
-		# E ignoriamo eventuali righe vuote
 		note_lines = [riga.strip() for riga in note_str.split("\n") if riga.strip()]
-
 		# Intestazione: "1. NomeStudente"
 		report_lines.append(f"{i}. {studente}")
-
 		# Se non ci sono note, puoi decidere di non stampare nulla, oppure stampare un messaggio
 		if not note_lines:
 			continue
-
 		# Stampa delle note con lettera maiuscola progressiva
 		for j, nota in enumerate(note_lines):
 			letter_label = index_to_letter(j)  # Converte j in A, B, C, ..., Z, AA, AB, ...
@@ -94,9 +84,7 @@ def genera_report(dati):
 	# Salviamo il report finale
 	with open("e:/dropbox/scacchierando/Risorse e curiosità/Il giochino - Classifiche.txt", "w", encoding="utf-8") as file:
 		file.write("\n".join(report_lines))
-
 	print("Report generato: report_finale.txt")
-
 def trova_corrispondenze(dati, nome):
 	corrispondenze = [studente for studente in dati if nome.lower() in studente.lower()]
 	return corrispondenze
@@ -177,10 +165,10 @@ def main():
 		elif scelta == "5":
 			nota = input("Inserisci la nota: ").strip()
 			data_corrente = datetime.now().strftime("%Y.%m.%d")
-			# Accodiamo la nota. Volendo si può strutturare diversamente,
-			# ma qui continuiamo con la stessa logica
 			dati[nome]["Note"] += f"\n    {data_corrente}: {nota} "
-			print(f"\nStudente: {nome}, Note, {len(dati[nome]['Note'])}")
+			note_lines = [riga.strip() for riga in dati[nome]["Note"].split('\n') if riga.strip()]
+			num_note = len(note_lines)
+			print(f"\nStudente: {nome}, numero di note inserite: {num_note}")
 		else:
 			print("\nScelta non valida. Riprova.")
 
