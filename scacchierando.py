@@ -98,9 +98,8 @@ def main():
 		if nome.lower() == "fine":
 			genera_report(dati)
 			salva_dati(dati)
-			print("Dati salvati e report generato. Uscita.")
+			print("Dati salvati.")
 			break
-
 		corrispondenze = trova_corrispondenze(dati, nome)
 		if len(corrispondenze) > 1:
 			print(f"Corrispondenze trovate: {len(corrispondenze)}")
@@ -124,7 +123,6 @@ def main():
 			else:
 				print("Ok, non aggiungo nessuno.")
 				continue
-
 		print("Opzioni: [1] Presenze online, [2] Esercizi, [3] Commenti, [4] Aiuto agli altri, [5] Nota [0] Elimina")
 		scelta = key("Seleziona l'opzione (1-2-3-4-5-0): ")
 		if scelta in {"1", "2", "3", "4"}:
