@@ -14,7 +14,7 @@ def carica_dati():
 
 def salva_dati(dati):
 	with open(DATA_FILE, "w") as file:
-		json.dump(dati, file, indent=2)
+		json.dump(dati, file, indent=1)
 
 def index_to_letter(index):
 	"""
