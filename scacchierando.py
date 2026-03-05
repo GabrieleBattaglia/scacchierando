@@ -1,4 +1,5 @@
 # V11.2 del 2025.02.01 by IZ4APU and ChatGPT O1
+VERSION = "11.2"
 import json
 import os
 from datetime import datetime
